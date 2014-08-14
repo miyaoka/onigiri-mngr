@@ -1,0 +1,68 @@
+$icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+$fa-font-path: "/bower_components/font-awesome/fonts";
+
+@import 'bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+@import 'font-awesome/scss/font-awesome';
+
+/**
+ * App-wide Styles
+ */
+
+.browsehappy {
+    margin: 0.2em 0;
+    background: #ccc;
+    color: #000;
+    padding: 0.2em 0;
+}
+
+// Component styles are injected through grunt
+// injector
+@import 'main/main.scss';
+// endinjector
+
+
+/*
+ * toast
+ */
+#toast-container > div.ng-enter,
+#toast-container > div.ng-leave
+{
+    -webkit-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 100ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+}
+
+#toast-container > div.ng-enter.ng-enter-active,
+#toast-container > div.ng-leave {
+    opacity: 0.8;
+}
+
+#toast-container > div.ng-leave.ng-leave-active,
+#toast-container > div.ng-enter {
+    opacity: 0;
+}
+
+.toast {
+  background-color: #030303;
+}
+.toast-primary {
+  background-color: #428bca;
+}
+.toast-success {
+  background-color: #5cb85c;
+}
+.toast-error {
+  background-color: #d9534f;
+}
+.toast-info {
+  background-color: #5bc0de;
+}
+.toast-warning {
+  background-color: #f0ad4e;
+}
+
+#toast-container > div {
+  width: 300px;
+}

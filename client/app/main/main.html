@@ -1,0 +1,211 @@
+<toaster-container toaster-options="{'time-out': 10000, 'position-class': 'toast-bottom-right'}"></toaster-container>
+
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">もし高校野球の女子マネージャーが（略）</a>
+    </div>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav nav navbar-right">
+        <li class="divider-vertical"><a href="/about">about</a></li>
+        <li class="divider-vertical"><a href="https://twitter.com/miyaoka">@miyaoka</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+
+<h1 class="pull-left">{{time.date | date: 'yyyy年MM月dd日'}}({{jpDays[time.date.getDay()]}})</h1>
+<div class="btn btn-default"><i class="fa fa-play"></i></div>
+<div class="btn btn-default"><i class="fa fa-pause"></i></div>
+<div class="clearfix"/>
+<div class="row">
+  <div class="col-xs-6">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">部費</h2>
+  </div>
+
+  <div class="panel-body">
+    <img src="assets/images/money.png" width="75" height="75" class="pull-left">
+    <div class="money text-right">{{money.value | number:0}}円</div>
+  </div>
+
+
+</div>
+
+
+
+  </div>
+  <div class="col-xs-6">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">
+      米
+      <small class="pull-right">市場供給率{{rice.supplyRate * 100 | number:1}}%</small>
+    </h1>
+  </div>
+
+  <div class="panel-body">
+    <img src="assets/images/rice_bale.jpg" width="75" height="75">
+    <div class="rice pull-right">{{rice.value / 1000 | number : 1}}kg</div>
+
+  </div>
+  <div class="panel-footer">
+        <div class="btn btn-primary" ng-click="rice.buy(1000000)" ng-disabled="!rice.canBuy(1000000)">
+          <i class="fa fa-shopping-cart fa-lg"></i>
+          1㌧購入 （{{rice.buyPrice * 1000000 | number:0}}円）
+        </div>
+        <div class="btn btn-primary" ng-click="rice.buy(100000)" ng-disabled="!rice.canBuy(100000)">
+          <i class="fa fa-shopping-cart fa-lg"></i>
+          100kg購入 （{{rice.buyPrice * 100000| number:0}}円）
+        </div>
+  </div>
+</div>
+
+
+
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12">
+
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h2 class="panel-title">おにぎり</h2>
+  </div>
+  <div class="panel-body">
+<!--
+    <img src="assets/images/onigiri-2.png" width="75" height="75">
+    <div class="player pull-right">これまでに食べた数：{{onigiri.consumped}}個</div>
+-->
+    <h4>供給率</h4>
+    <progressbar value="player.supplyRate" max="2" type="success">{{player.supplyRate * 100 | number:1}}%</progressbar>
+
+    <div class="row">
+      <div class="col-xs-6 text-right onigiri">
+        <h3>需要{{player.onigiriNeeds | number:0}}個</h3>
+      </div>
+      <div class="col-xs-6 onigiri">
+        <h3>供給{{onigiri.value | number:0}}個</h3>
+   <!--
+        <img src="assets/images/onigiri-2.png" width="16" height="16" ng-repeat="o in onigiri.array">
+-->
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-xs-6">
+
+
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h2 class="panel-title">部員</h2>
+  </div>
+  <div class="panel-body">
+    <i class="fa fa-user" ng-repeat="p in player.array"></i>
+    <div class="player pull-right">合計：{{player.total}}人</div>
+
+    <table class="table">
+      <tr>
+        <td>3年生</td>
+        <td>{{player.members[2]}}人</td>
+      </tr>
+      <tr>
+        <td>2年生</td>
+        <td>{{player.members[1]}}人</td>
+      </tr>
+      <tr>
+        <td>1年生</td>
+        <td>{{player.members[0]}}人</td>
+      </tr>
+
+    </table>
+
+    <h4>
+      <i class="fa fa-smile-o fa-lg"></i>
+      士気
+    </h4>
+
+    <progressbar value="player.moral" max="1" type="success">{{player.moral * 100 | number:1}}%</progressbar>
+
+  </div>
+  <div class="panel-footer">
+
+    <div class="btn btn-primary btn-block" ng-click="player.buy()" ng-disabled="!player.canBuy">
+      <i class="fa fa-plus fa-lg"></i>
+      募集 （{{player.buyPrice | number : 0}}円）
+    </div>
+
+  </div>
+
+</div>
+  </div>
+
+  <div class="col-xs-6">
+
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h2 class="panel-title">マネージャー</h2>
+  </div>
+  <div class="panel-body">
+
+    <i class="fa fa-user fa-2x" ng-repeat="p in manager.array"></i>
+    <div class="manager pull-right">合計：{{manager.total}}人</div>
+
+<table class="table">
+  <tbody>
+    <tr>
+      <td>3年生</td>
+      <td>{{manager.members[2]}}人</td>
+    </tr>
+    <tr>
+      <td>2年生</td>
+      <td>{{manager.members[1]}}人</td>
+    </tr>
+    <tr>
+      <td>1年生</td>
+      <td>{{manager.members[0]}}人</td>
+    </tr>
+  </tbody>
+</table>
+
+
+  </div>
+  <div class="panel-footer">
+
+  <div class="btn btn-primary btn-block" ng-click="manager.buy()" ng-disabled="!manager.canBuy">
+    <i class="fa fa-plus fa-lg"></i>
+    募集 （{{manager.buyPrice  | number : 0}}円）
+  </div>
+
+
+
+  </div>
+
+
+
+</div>
+
+
+
+
+</div>
