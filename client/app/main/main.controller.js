@@ -1,22 +1,21 @@
 'use strict';
 
 angular.module('onigiriApp')
-  .controller('MainCtrl', function ($scope, Money, Rice, Manager, Player, Onigiri, Time, $timeout, toaster) {
+  .controller('MainCtrl', function ($scope, Time, Manager, Player, $timeout, Onigiri, Log, Game) {
 
-    $scope.jpDays = '日月火水木金土日'.split('');
-    $scope.money = Money;
-    $scope.rice = Rice;
-    $scope.manager = Manager;
-    $scope.player = Player;
-    $scope.onigiri = Onigiri;
+    $scope.version = 'v1.0.0 (2014.08.15)';
+
     $scope.time = Time;
+    $scope.jpDays = '日月火水木金土日'.split('');
 
-    $timeout(function(){
-//      toaster.pop('info', "スタート", "おにぎり供給率を満たしつつ部員を増やしていきましょう");
-    }, 1000);
+    Log.add(
+      'スタート',
+      '米を購入し、マネージャーを雇っておにぎりを供給しましょう。部員が集まれば試合に出場するようになります',
+      'panel-info'
+    );
 
 
-    var loop = function(){
+    var onFrame = function(){
       $timeout(function(){
         var date = Time.date;
         Time.nextDay();
@@ -26,19 +25,25 @@ angular.module('onigiriApp')
           Manager.nextYear();
           Player.nextYear();
 
-          toaster.pop('info', "新年度", "進級しました。メンバー構成を確認しましょう");
+    Log.add(
+      '新年度',
+      '進級しました。メンバー構成を確認しましょう',
+      'panel-info'
+    );
+//          toaster.pop('info', "新年度", "進級しました。メンバー構成を確認しましょう");
         }
 
-        if(Time.date.getDay() == 0){
-          Player.game();
+        if(Time.date.getDay() == 0 && 9 <= Player.total){
+          Game.game();
         }
 
         Manager.run();
         Player.run();
-        loop();
-      }, 1000);
+
+        onFrame();
+      }, 1000 * .75);
     };
-    loop();
+    onFrame();
 
 
   });

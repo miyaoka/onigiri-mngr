@@ -4,7 +4,7 @@ angular.module('onigiriApp')
   .factory('Money', function () {
 
     var Money = {
-      value : 1000000
+      value : 200000
     };
     return Money;
   });

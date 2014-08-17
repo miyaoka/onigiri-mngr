@@ -6,7 +6,7 @@ angular.module('onigiriApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'toaster'
+  'btford.markdown'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
