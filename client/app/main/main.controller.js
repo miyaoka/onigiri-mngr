@@ -3,7 +3,7 @@
 angular.module('onigiriApp')
   .controller('MainCtrl', function ($scope, Time, Manager, Player, $timeout, Onigiri, Log, Game) {
 
-    $scope.version = 'v1.0.0 (2014.08.15)';
+    $scope.version = 'v1.1.0 (2014.08.17)';
 
     $scope.time = Time;
     $scope.jpDays = '日月火水木金土日'.split('');
