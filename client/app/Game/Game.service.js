@@ -121,8 +121,8 @@ angular.module('onigiriApp')
 //              $filter('number')(playerMembers) + '人'
             ].join(' '),
             [
-              '（相手ランク: ', (teamCount - enemyRank), '位）'
-            ].join(' '),
+              '（相手ランク: 全国', (teamCount - enemyRank), '位）'
+            ].join(''),
             '+ ' + $filter('number')(money) + '円'
           ].join('<br>'),
           resultType[result]
