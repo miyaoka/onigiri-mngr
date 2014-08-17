@@ -29,6 +29,7 @@ angular.module('onigiriApp')
       '甲子園決勝'//2
     ];
     var rank = 0;
+    var enemyRank;
 
     function randDraw(list, max){
       if(!max){
@@ -69,7 +70,9 @@ angular.module('onigiriApp')
       game : function(){
 
         //敵チームのランク取得（少ないほど弱い）
-        var enemyRank = (rank == 0) ? randDraw(teams, .1) : randDraw(teams);
+        if(enemyRank == null){
+          enemyRank = (rank == 0) ? randDraw(teams, .1) : randDraw(teams);
+        }
         //ランク順からメンバー数を算出する
         var enemyMembers = jStat.lognormal.inv(enemyRank / teamCount, mu, sigma) + minMember;
         var playerMembers = Player.total;
@@ -125,6 +128,10 @@ angular.module('onigiriApp')
           resultType[result]
         );
 
+        //引き分け
+        if(result == 2){
+          return;
+        }
         //勝利
         if(result == 0){
           //練習試合でなければ他校も処理する
@@ -144,6 +151,8 @@ angular.module('onigiriApp')
           rank = 0;
           this.init();
         }
+        //敵リセット
+        enemyRank = null;
       }
     };
     Game.init();
