@@ -8,7 +8,7 @@ angular.module('onigiriApp')
     function addNew(){
       var len = Player.total;
       Player.members[0]++;
-//      return;
+      return;
       Log.add(
         '[新入部員加入]',
         '部員： ' + len + '人→' + (len+1) + '人'
