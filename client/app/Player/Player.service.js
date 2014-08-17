@@ -3,7 +3,6 @@
 angular.module('onigiriApp')
   .factory('Player', function (Money, Time, Onigiri, Log) {
     var basePrice = 100;
-    var onigiriPerPlayer = 2;
 
     function addNew(){
       var len = Player.total;
@@ -36,6 +35,7 @@ angular.module('onigiriApp')
       }
     }
     var Player = {
+      onigiriPerPlayer : 3,
       members : [0,0,0],
 //        Math.floor(Math.random()*5)+3,
 //        Math.floor(Math.random()*5)+3,
@@ -60,7 +60,7 @@ angular.module('onigiriApp')
         return (Money.value < this.buyPrice) ? false : true;
       },
       get onigiriNeeds(){
-        return Math.ceil(this.total * onigiriPerPlayer);
+        return Math.ceil(this.total * this.onigiriPerPlayer);
       },
       buy: function(){
         Money.value -= this.buyPrice;

@@ -4,13 +4,14 @@ angular.module('onigiriApp')
   .factory('Onigiri', function (Rice) {
     //米(g)あたりのおにぎり個数
     var onigiriPerRice = 22.5 / 1000;
+    var onigiriPerPlayer = 3;
 
     var Onigiri = {
       value : 0,
       consumped: 0,
       get array(){
         var ary = [];
-        for(var i = 0; i < this.value/2; i++){
+        for(var i = 0; i < this.value/ onigiriPerPlayer; i++){
           ary.push(i);
         }
         return ary;
