@@ -10,6 +10,8 @@ angular.module('onigiriApp')
     $scope.onigiri = Onigiri;
     $scope.log = Log;
 
-
+    $scope.removeManager = function(grade){
+      Manager.remove(grade);
+    }
 
   });

@@ -3,7 +3,7 @@
 angular.module('onigiriApp')
   .controller('MainCtrl', function ($scope, Time, Manager, Player, $timeout, Onigiri, Log, Game) {
 
-    $scope.version = 'v1.0.0 (2014.08.15)';
+    $scope.version = 'v1.1.0 (2014.08.17)';
 
     $scope.time = Time;
     $scope.jpDays = '日月火水木金土日'.split('');
@@ -33,12 +33,13 @@ angular.module('onigiriApp')
 //          toaster.pop('info', "新年度", "進級しました。メンバー構成を確認しましょう");
         }
 
-        if(Time.date.getDay() == 0 && 9 <= Player.total){
-          Game.game();
-        }
 
         Manager.run();
         Player.run();
+
+        if(Time.date.getDay() == 0 && 9 <= Player.total){
+          Game.game();
+        }
 
         onFrame();
       }, 1000 * .75);

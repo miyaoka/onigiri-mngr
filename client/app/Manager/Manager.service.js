@@ -2,7 +2,9 @@
 
 angular.module('onigiriApp')
   .factory('Manager', function (Money, Onigiri, Util) {
-    var basePrice = 50000;
+    //base^n * const
+    var constPrice = 10000;
+    var basePrice = 1.5;
 
     //マネージャー一人当たりのおにぎり作成平均値
     var OnigiriMu = 30;
@@ -22,8 +24,7 @@ angular.module('onigiriApp')
         return this.members[0] + this.members[1] + this.members[2];
       },
       get buyPrice(){
-        return Math.pow(2, this.total) * 10000;
-        return basePrice * (this.total + 1);
+        return Math.pow(basePrice, this.total) * constPrice;
       },
       get canBuy(){
         return (Money.value < this.buyPrice) ? false : true;
@@ -31,6 +32,9 @@ angular.module('onigiriApp')
       buy: function(){
         Money.value -= this.buyPrice;
         this.members[0] += 1;
+      },
+      remove: function(grade){
+        this.members[grade]--;
       },
       nextYear: function(){
         this.members.pop();
