@@ -33,6 +33,9 @@ angular.module('onigiriApp')
         Money.value -= this.buyPrice;
         this.members[0] += 1;
       },
+      remove: function(grade){
+        this.members[grade]--;
+      },
       nextYear: function(){
         this.members.pop();
         this.members.unshift(0);
