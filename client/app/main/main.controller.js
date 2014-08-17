@@ -33,12 +33,13 @@ angular.module('onigiriApp')
 //          toaster.pop('info', "新年度", "進級しました。メンバー構成を確認しましょう");
         }
 
-        if(Time.date.getDay() == 0 && 9 <= Player.total){
-          Game.game();
-        }
 
         Manager.run();
         Player.run();
+
+        if(Time.date.getDay() == 0 && 9 <= Player.total){
+          Game.game();
+        }
 
         onFrame();
       }, 1000 * .75);
