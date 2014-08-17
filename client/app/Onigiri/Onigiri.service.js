@@ -10,7 +10,7 @@ angular.module('onigiriApp')
       consumped: 0,
       get array(){
         var ary = [];
-        for(var i = 0; i < this.value; i++){
+        for(var i = 0; i < this.value/2; i++){
           ary.push(i);
         }
         return ary;
@@ -21,12 +21,15 @@ angular.module('onigiriApp')
         //米が足りなかったら作成可能な分だけ消費
         if(Rice.value < riceNeeds){
           onigiriNum = Math.floor(Rice.value * onigiriPerRice);
-          riceNeeds = onigiriNum / onigiriPerRice;
+          riceNeeds = Rice.value;
         }
 
         this.value = onigiriNum;
         this.consumped += onigiriNum;
         Rice.value -= riceNeeds;
+      },
+      reset: function(){
+        this.value = 0;
       }
     };
     return Onigiri;

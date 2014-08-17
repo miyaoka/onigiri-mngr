@@ -1,25 +1,51 @@
 'use strict';
 
 angular.module('onigiriApp')
-  .factory('Player', function (Money, Time, Onigiri, toaster) {
+  .factory('Player', function (Money, Time, Onigiri, Log) {
     var basePrice = 100;
     var onigiriPerPlayer = 2;
 
-    var resultType = ['success', 'error', 'warning'];
-    var resultStr = ['勝利', '敗北', '引き分け'];
-    var resultMoney = [100000, 1000, 20000];
-
+    function addNew(){
+      var len = Player.total;
+      Player.members[0]++;
+//      return;
+      Log.add(
+        '[新入部員加入]',
+        '部員： ' + len + '人→' + (len+1) + '人'
+//        'panel-info'
+      );
+    }
+    //全メンバーの中からランダムで退部
+    function dropout(){
+      var len = Player.total;
+      if(len == 0){
+        return;
+      }
+      var i = Math.floor(len * Math.random());
+      for(var g = 0; g < 3; g++){
+        var m = Player.members[g];
+        if(i < m){
+          Player.members[g]--;
+          Log.add(
+            'おにぎり不足により',
+            '＿人人人人人人人＿<br>＞　突然の退部　＜<br>￣Y^Y^Y^Y^Y^Y￣' //<br>'+ '部員： ' + len +'人→' + (len-1) + '人'
+          )
+          return;
+        }
+        i -= m;
+      }
+    }
     var Player = {
-      members : [
-        Math.floor(Math.random()*5)+3,
-        Math.floor(Math.random()*5)+3,
-        Math.floor(Math.random()*5)+3
-      ],
+      members : [0,0,0],
+//        Math.floor(Math.random()*5)+3,
+//        Math.floor(Math.random()*5)+3,
+//        Math.floor(Math.random()*5)+3
+//      ],
       moral : Math.random(),
       supplyRate: 0,
-      get array(){
+      array: function(index){
         var ary = [];
-        for(var i = 0; i < this.total; i++){
+        for(var i = 0; i < this.members[index]; i++){
           ary.push(i);
         }
         return ary;
@@ -46,43 +72,26 @@ angular.module('onigiriApp')
       },
       //毎ターンの処理
       run : function(){
+        //部員ゼロの場合
+        if(this.onigiriNeeds == 0){
+          this.supplyRate = 0;
+          if(0 < Onigiri.value){
+            addNew();
+          }
+          return;
+        }
         var supply = Onigiri.value / this.onigiriNeeds;
         this.supplyRate = supply;
         if(supply > 1){
-          this.moral += .01;
+          addNew();
           return;
         }
-        this.moral -= .01;
-
-      },
-      //週末の試合
-      game : function(){
-        var scores = [[],[]];
-        var totals = [0,0];
-        for(var j = 0; j < 2; j++){
-          for(var i = 0; i < 9; i++){
-            //底が.5の対数。0.5で1、0.001で9.96
-            var score = Math.min(9, Math.floor( Math.log( Math.random() ) / Math.log(.4) ));
-            scores[j][i] = score;
-            totals[j] += score;
-          }
+        //供給欠乏度により退部判定
+        var lack = 1 - supply;
+        if(Math.random() < Math.pow(lack,3)){
+          dropout();
         }
 
-        //0:win, 1:lose, 2:draw
-        var result = (totals[1] > totals[0]) ? 0 : (totals[1] < totals[0]) ? 1 : 2;
-
-        Money.value += resultMoney[result];
-
-        toaster.pop(
-          resultType[result],
-          '練習試合' + ' （' + resultStr[result] + '）',
-          [
-            ['敵軍', scores[0].join(' '), totals[0]].join(' | '),
-            ['自軍', scores[1].join(' '), totals[1]].join(' | '),
-            '+' + resultMoney[result] + '円'
-          ].join('<br>'),
-          5000, 'trustedHtml'
-        );
       }
     }
 

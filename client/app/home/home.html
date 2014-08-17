@@ -1,0 +1,152 @@
+<div class="container">
+
+<!--
+<h1 class="pull-left"></h1>
+<div class="btn btn-default"><i class="fa fa-play"></i></div>
+<div class="btn btn-default"><i class="fa fa-pause"></i></div>
+<div class="clearfix"/>
+
+-->
+
+<div class="row">
+
+
+
+
+
+
+  <div class="col-sm-8">
+
+
+
+
+
+
+<div class="row">
+  <div class="col-xs-12">
+
+    <h2>おにぎり供給率：{{player.supplyRate * 100 | number:0}}%</h2>
+
+    <table class="table">
+
+     <tr>
+        <td>
+          米
+          <div class="text-right item">{{rice.value / 1000 | number: 0}}kg</div>
+            <div class="btn btn-default btn-sm" ng-click="rice.buy(60000)" ng-disabled="!rice.canBuy(60000)">
+              <i class="fa fa-shopping-cart fa-lg"></i>
+              60kg購入 （{{rice.buyPrice * 60000| number:0}}円）
+            </div>
+            <div class="btn btn-default btn-sm" ng-click="rice.buy(1000000)" ng-disabled="!rice.canBuy(1000000)">
+              <i class="fa fa-shopping-cart fa-lg"></i>
+              1㌧購入 （{{rice.buyPrice * 1000000 | number:0}}円）
+            </div>
+        </td>
+        <td>
+          <div>
+            <img src="assets/images/rice_bale.jpg" width="44" height="44" ng-repeat="r in rice.array">
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          マネージャー
+          <div class="text-right item">{{manager.total}}人</div>
+
+    <div class="btn btn-default btn-sm" ng-click="manager.buy()" ng-disabled="!manager.canBuy">
+      <i class="fa fa-plus fa-lg"></i>
+      募集 （{{manager.buyPrice  | number : 0}}円）
+    </div>
+
+        </td>
+        <td>
+          <div class="managers">
+            <i class="fa fa-user fa-3x third" ng-repeat="p in manager.array(2)"></i><i class="fa fa-user fa-3x second" ng-repeat="p in manager.array(1)"></i><i class="fa fa-user fa-3x first" ng-repeat="p in manager.array(0)"></i>
+          </div>
+        </td>
+      </tr>
+
+
+
+      <tr>
+        <td>
+          おにぎり
+          <div class="text-right item">{{onigiri.value}}個</div>
+        </td>
+        <td>
+          <div>
+            <img src="assets/images/onigiri-2.png" width="22" height="22" ng-repeat="o in onigiri.array">
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="120">
+          部員
+          <div class="text-right item">{{player.total}}人</div>
+        </td>
+        <td>
+          <div class="players">
+            <i class="fa fa-user fa-2x third" ng-repeat="p in player.array(2)"></i><i class="fa fa-user fa-2x second" ng-repeat="p in player.array(1)"></i><i class="fa fa-user fa-2x first" ng-repeat="p in player.array(0)"></i>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+
+  </div>
+
+
+
+
+  <div class="col-sm-4">
+
+  <h2>{{time.date | date: 'yyyy年MM月dd日'}}({{jpDays[time.date.getDay()]}})</h2>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">部費</h2>
+      </div>
+
+      <div class="panel-body">
+        <img src="assets/images/money.png" width="75" height="75" class="pull-left">
+        <div class="money text-right">{{money.value | number:0}}円</div>
+      </div>
+    </div>
+
+
+
+
+
+        <div ng-repeat="l in log.array">
+          <h4>{{l.date | date: 'yyyy年MM月dd日'}}({{jpDays[l.date.getDay()]}})</h4>
+          <div class="panel {{l.theme}}">
+            <div class="panel-heading">
+              <h5 class="panel-title">{{l.title}}</h5>
+            </div>
+            <div class="panel-body" ng-bind-html="l.body">
+            </div>
+          </div>
+        </div>
+
+  </div>
+
+
+
+</div>
+
+
+
+

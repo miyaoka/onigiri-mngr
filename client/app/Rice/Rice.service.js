@@ -11,14 +11,23 @@ angular.module('onigiriApp')
     var sellMargin = .8;
 
     var Rice = {
-      value : 500 * 1000,
+      value : 0 * 1000,
+      get array(){
+        var ary = [];
+        //60kg単価
+        var len = Math.ceil(this.value/60000);
+        for(var i = 0; i < len; i++){
+          ary.push(i);
+        }
+        return ary;
+      },
       get supplyRate(){
         return supplySize / MaxSupplySize;
       },
       get marketPrice(){
         // 底が.75の対数値
         // rest 1 = 0, .75 = 1, .05 = 10.41
-        return dealPrice * (1 + Math.log(this.supplyRate) / Math.log(.5));
+        return dealPrice;// * (1 + Math.log(this.supplyRate) / Math.log(.5));
       },
       get buyPrice(){
         return this.marketPrice * buyMargin;
@@ -29,19 +38,10 @@ angular.module('onigiriApp')
       canBuy: function(num){
         return (Money.value < (this.buyPrice * num)) ? false : true;
       },
-      get canSell(num){
-        return (this.value < dealSize) ? false : true;
-      },
       buy: function(num){
         Money.value -= this.buyPrice * num;
         supplySize -= num;
         this.value += num;
-      },
-      sell: function(){
-        this.value -= dealSize;
-        supplySize += dealSize;
-        Money.value += this.sellPrice;
-
       }
     }
 
