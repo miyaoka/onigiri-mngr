@@ -119,7 +119,7 @@
 
   <div class="col-sm-4">
 
-  <h2>{{time.date | date: 'yyyy年MM月dd日'}}({{jpDays[time.date.getDay()]}})</h2>
+  <h2>{{time.date | appdate}}</h2>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h2 class="panel-title">部費</h2>
@@ -136,7 +136,7 @@
 
 
         <div ng-repeat="l in log.array">
-          <h4>{{l.date | date: 'yyyy年MM月dd日'}}({{jpDays[l.date.getDay()]}})</h4>
+          <h4>{{l.date | appdate }}</h4>
           <div class="panel {{l.theme}}">
             <div class="panel-heading">
               <h5 class="panel-title">{{l.title}}</h5>

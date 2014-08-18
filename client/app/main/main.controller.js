@@ -6,7 +6,6 @@ angular.module('onigiriApp')
     $scope.version = 'v1.1.2 (2014.08.17)';
 
     $scope.time = Time;
-    $scope.jpDays = '日月火水木金土日'.split('');
 
     Log.add(
       'スタート',
