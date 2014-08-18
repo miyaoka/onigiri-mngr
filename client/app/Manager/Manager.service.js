@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('onigiriApp')
-  .factory('Manager', function (Money, Onigiri, Util) {
+  .factory('Manager', function (Money, Onigiri, Util, Achievements) {
     //base^n * const
     var constPrice = 10000;
     var basePrice = 1.5;
@@ -32,6 +32,12 @@ angular.module('onigiriApp')
       buy: function(){
         Money.value -= this.buyPrice;
         this.members[0] += 1;
+
+        Achievements.unlock('mgr1');
+        if(this.total < 5){ return }
+          Achievements.unlock('mgr2');
+        if(this.total < 10){ return }
+          Achievements.unlock('mgr3');
       },
       remove: function(grade){
         this.members[grade]--;

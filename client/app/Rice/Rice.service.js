@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('onigiriApp')
-  .factory('Rice', function (Money) {
+  .factory('Rice', function (Money, Achievements) {
     var MaxSupplySize =  10000 * 1000;
     var supplySize =  10000 * 1000;
     var dealSize = 100 * 1000;
@@ -42,6 +42,18 @@ angular.module('onigiriApp')
         Money.value -= this.buyPrice * num;
         supplySize -= num;
         this.value += num;
+
+        Achievements.unlock('rice1');
+        if(this.value < 1000 * 1000){ return }
+          Achievements.unlock('rice2');
+        if(this.value < 2000 * 1000){ return }
+          Achievements.unlock('rice3');
+        if(this.value < 3000 * 1000){ return }
+          Achievements.unlock('rice4');
+        if(this.value < 4000 * 1000){ return }
+          Achievements.unlock('rice5');
+        if(this.value < 5000 * 1000){ return }
+          Achievements.unlock('rice6');
       }
     }
 

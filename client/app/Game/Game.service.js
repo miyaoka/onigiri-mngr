@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('onigiriApp')
-  .factory('Game', function (Util, Player, Log, Money, $filter) {
+  .factory('Game', function (Util, Player, Log, Money, $filter, Achievements) {
     var resultType = ['panel-success', 'panel-danger', 'panel-warning'];
     var resultStr = ['勝利', '敗北', '引き分け'];
 
@@ -30,6 +30,7 @@ angular.module('onigiriApp')
     ];
     var rank = 0;
     var enemyRank;
+    var rankLocalFinal = 6;
 
     function randDraw(list, max){
       if(!max){
@@ -128,26 +129,48 @@ angular.module('onigiriApp')
           resultType[result]
         );
 
+        Achievements.unlock('game1');
+
         //引き分け
         if(result == 2){
           return;
         }
         //勝利
         if(result == 0){
+          if((totals[1]-totals[0]) >= 10){
+            Achievements.unlock('game2');
+          }
           //練習試合でなければ他校も処理する
           if(rank > 0){
             this.gameOther();
           }
+          //地区大会決勝勝利
+          if(rank == rankLocalFinal){
+            Achievements.unlock('game5');
+          }
+
           //ランク上げる
           rank++;
+
+          //地区大会決勝進出
+          if(rank == rankLocalFinal){
+            Achievements.unlock('game3');
+          }
+
           //優勝したらリセット
           if(rank >= gameRanks.length){
+            Achievements.unlock('game6');
             rank = 0;
             this.init();
           }
         }
         //敗北
         else if(result == 1){
+          //地区大会決勝敗退
+          if(rank == rankLocalFinal){
+            Achievements.unlock('game4');
+          }
+
           rank = 0;
           this.init();
         }
