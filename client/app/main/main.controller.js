@@ -3,10 +3,9 @@
 angular.module('onigiriApp')
   .controller('MainCtrl', function ($scope, Time, Manager, Player, $timeout, Onigiri, Log, Game, Achievements) {
 
-    $scope.version = 'v1.1.1 (2014.08.17)';
+    $scope.version = 'v1.1.3 (2014.08.18)';
 
     $scope.time = Time;
-    $scope.jpDays = '日月火水木金土日'.split('');
 
     Log.add(
       'スタート',
@@ -31,8 +30,7 @@ angular.module('onigiriApp')
             'panel-info'
           );
 
-          Achievements.unlock('time1');
-//          toaster.pop('info', "新年度", "進級しました。メンバー構成を確認しましょう");
+//          Achievements.unlock('time1');
         }
 
 

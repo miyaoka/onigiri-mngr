@@ -27,9 +27,9 @@ angular.module('onigiriApp')
         this.members[0] += 1;
 
         Achievements.unlock('mgr1');
-        if(this.total < 5){ return }
-          Achievements.unlock('mgr2');
         if(this.total < 10){ return }
+          Achievements.unlock('mgr2');
+        if(this.total < 20){ return }
           Achievements.unlock('mgr3');
       },
       remove: function(grade){
