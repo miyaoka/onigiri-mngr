@@ -10,16 +10,17 @@ angular.module('onigiriApp')
     var buyMargin = 1.2;
     var sellMargin = .8;
 
+    //アイコン一つ当たりの米容量
+    var iconSmall = 60000;
+    var iconLarge = iconSmall * 50;
+
     var Rice = {
-      get array(){
-        var ary = [];
-        //60kg単価
-        var len = Math.ceil(this.value/60000);
-        for(var i = 0; i < len; i++){
-          ary.push(i);
-        }
-        return ary;
       count : 0 * 1000,
+      get largeCount(){
+        return Math.floor(this.count / iconLarge);
+      },
+      get smallCount(){
+        return Math.ceil((this.count % iconLarge) / iconSmall);
       },
       get supplyRate(){
         return supplySize / MaxSupplySize;

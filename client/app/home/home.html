@@ -44,7 +44,8 @@
         </td>
         <td>
           <div>
-            <img src="assets/images/rice_bale.jpg" width="44" height="44" ng-repeat="r in rice.array">
+            <img src="assets/images/rice_bale.jpg" class="rice-lg" ng-repeat="n in [rice.largeCount] | range">
+            <img src="assets/images/rice_bale.jpg" class="rice-sm" ng-repeat="n in [rice.smallCount] | range">
           </div>
         </td>
       </tr>
