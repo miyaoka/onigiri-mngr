@@ -11,13 +11,17 @@ angular.module('onigiriApp')
     var sellMargin = .8;
 
     //アイコン一つ当たりの米容量
-    var iconSmall = 60000;
-    var iconLarge = iconSmall * 50;
+    var iconSmall = 60000; //60kg
+    var iconLarge = iconSmall * 50; //3t
+    var iconXL = iconLarge * 50; //150t
 
     var Rice = {
       count : 0 * 1000,
+      get xlCount(){
+        return Math.floor(this.count / iconXL);
+      },
       get largeCount(){
-        return Math.floor(this.count / iconLarge);
+        return Math.floor((this.count % iconXL) / iconLarge);
       },
       get smallCount(){
         return Math.ceil((this.count % iconLarge) / iconSmall);
@@ -47,13 +51,13 @@ angular.module('onigiriApp')
         Achievements.unlock('rice1');
         if(this.count < 3000 * 1000){ return }
           Achievements.unlock('rice2');
-        if(this.count < 6000 * 1000){ return }
+        if(this.count < 10000 * 1000){ return }
           Achievements.unlock('rice3');
-        if(this.count < 9000 * 1000){ return }
+        if(this.count < 50000 * 1000){ return }
           Achievements.unlock('rice4');
-        if(this.count < 12000 * 1000){ return }
+        if(this.count < 100000 * 1000){ return }
           Achievements.unlock('rice5');
-        if(this.count < 15000 * 1000){ return }
+        if(this.count < 1000000 * 1000){ return }
           Achievements.unlock('rice6');
       }
     }
