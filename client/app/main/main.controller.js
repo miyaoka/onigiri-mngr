@@ -30,8 +30,7 @@ angular.module('onigiriApp')
             'panel-info'
           );
 
-          Achievements.unlock('time1');
-//          toaster.pop('info', "新年度", "進級しました。メンバー構成を確認しましょう");
+//          Achievements.unlock('time1');
         }
 
 

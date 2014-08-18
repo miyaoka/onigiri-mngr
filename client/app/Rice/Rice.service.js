@@ -45,15 +45,15 @@ angular.module('onigiriApp')
         this.count += num;
 
         Achievements.unlock('rice1');
-        if(this.count < 1000 * 1000){ return }
-          Achievements.unlock('rice2');
-        if(this.count < 2000 * 1000){ return }
-          Achievements.unlock('rice3');
         if(this.count < 3000 * 1000){ return }
+          Achievements.unlock('rice2');
+        if(this.count < 6000 * 1000){ return }
+          Achievements.unlock('rice3');
+        if(this.count < 9000 * 1000){ return }
           Achievements.unlock('rice4');
-        if(this.count < 4000 * 1000){ return }
+        if(this.count < 12000 * 1000){ return }
           Achievements.unlock('rice5');
-        if(this.count < 5000 * 1000){ return }
+        if(this.count < 15000 * 1000){ return }
           Achievements.unlock('rice6');
       }
     }

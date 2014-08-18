@@ -18,12 +18,14 @@
   <div class="col-sm-8">
 
 
+  <tabset justified="true">
+    <tab>
+      <tab-heading>
+        <i class="fa fa-users fa-lg"></i> 部活状況
+      </tab-heading>
 
 
 
-
-<div class="row">
-  <div class="col-xs-12">
 
     <h2>おにぎり供給率：{{player.supplyRate * 100 | number:0}}%</h2>
 
@@ -102,12 +104,29 @@
 
 
 
+    </tab>
+    <tab>
+      <tab-heading>
+        <i class="fa fa-trophy fa-lg"></i> 実績一覧
+      </tab-heading>
+      <table class="table">
+        <tr>
+          <th>実績名</th>
+          <th>条件</th>
+          <th>達成日</th>
+        </tr>
+        <tr ng-repeat="a in achieve.list">
+          <td>{{a.title}}</td>
+          <td><div ng-hide="!achieve.unlocked[a.id]">{{a.desc}}</div></td>
+          <td>{{achieve.unlocked[a.id] ? (achieve.unlocked[a.id] | appdate) : ''}}</td>
+        </tr>
+      </table>
+
+    </tab>
+  </tabset>
 
 
 
-
-  </div>
-</div>
 
 
 
