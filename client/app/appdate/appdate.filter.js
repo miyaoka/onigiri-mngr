@@ -7,7 +7,7 @@ angular.module('onigiriApp')
     return function (date) {
 //      {{time.date | date: 'yyyy年MM月dd日'}}({{jpDays[time.date.getDay()]}})
       return [
-        (date.getFullYear() % 10),
+        (date.getFullYear() - 2000),
         $filter('date')(date, '年目MM月dd日'),
         '(', jpDays[date.getDay()], ')'
       ].join('');

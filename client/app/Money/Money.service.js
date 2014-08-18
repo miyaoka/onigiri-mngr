@@ -10,11 +10,11 @@ angular.module('onigiriApp')
       set count(input){
         _count = input;
 
-        if(_count < 1000000){ return }
-          Achievements.unlock('money1');
         if(_count < 10000000){ return }
-          Achievements.unlock('money2');
+          Achievements.unlock('money1');
         if(_count < 100000000){ return }
+          Achievements.unlock('money2');
+        if(_count < 1000000000){ return }
           Achievements.unlock('money3');
       }
     };
