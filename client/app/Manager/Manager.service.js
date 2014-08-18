@@ -13,13 +13,6 @@ angular.module('onigiriApp')
 
     var Manager = {
       members : [0,0,0],
-      array: function(index){
-        var ary = [];
-        for(var i = 0; i < this.members[index]; i++){
-          ary.push(i);
-        }
-        return ary;
-      },
       get total(){
         return this.members[0] + this.members[1] + this.members[2];
       },
