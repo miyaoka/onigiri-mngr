@@ -27,10 +27,10 @@ angular.module('onigiriApp')
         return Math.pow(basePrice, this.total) * constPrice;
       },
       get canBuy(){
-        return (Money.value < this.buyPrice) ? false : true;
+        return (Money.count < this.buyPrice) ? false : true;
       },
       buy: function(){
-        Money.value -= this.buyPrice;
+        Money.count -= this.buyPrice;
         this.members[0] += 1;
 
         Achievements.unlock('mgr1');

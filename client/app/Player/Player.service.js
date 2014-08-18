@@ -57,13 +57,13 @@ angular.module('onigiriApp')
         return basePrice * (this.total + 1);
       },
       get canBuy(){
-        return (Money.value < this.buyPrice) ? false : true;
+        return (Money.count < this.buyPrice) ? false : true;
       },
       get onigiriNeeds(){
         return Math.ceil(this.total * this.onigiriPerPlayer);
       },
       buy: function(){
-        Money.value -= this.buyPrice;
+        Money.count -= this.buyPrice;
         this.members[0] += 1;
       },
       nextYear: function(){
@@ -75,12 +75,12 @@ angular.module('onigiriApp')
         //部員ゼロの場合
         if(this.onigiriNeeds == 0){
           this.supplyRate = 0;
-          if(0 < Onigiri.value){
+          if(0 < Onigiri.count){
             addNew();
           }
           return;
         }
-        var supply = Onigiri.value / this.onigiriNeeds;
+        var supply = Onigiri.count / this.onigiriNeeds;
         this.supplyRate = supply;
         if(supply > 1){
           addNew();

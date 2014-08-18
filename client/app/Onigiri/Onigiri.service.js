@@ -7,7 +7,7 @@ angular.module('onigiriApp')
     var onigiriPerPlayer = 3;
 
     var Onigiri = {
-      value : 0,
+      count : 0,
       consumped: 0,
       get array(){
         var ary = [];
@@ -20,17 +20,17 @@ angular.module('onigiriApp')
         var riceNeeds = onigiriNum / onigiriPerRice;
 
         //米が足りなかったら作成可能な分だけ消費
-        if(Rice.value < riceNeeds){
-          onigiriNum = Math.floor(Rice.value * onigiriPerRice);
-          riceNeeds = Rice.value;
+        if(Rice.count < riceNeeds){
+          onigiriNum = Math.floor(Rice.count * onigiriPerRice);
+          riceNeeds = Rice.count;
         }
 
-        this.value = onigiriNum;
+        this.count = onigiriNum;
         this.consumped += onigiriNum;
-        Rice.value -= riceNeeds;
+        Rice.count -= riceNeeds;
       },
       reset: function(){
-        this.value = 0;
+        this.count = 0;
       }
     };
     return Onigiri;
