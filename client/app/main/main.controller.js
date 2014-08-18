@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('onigiriApp')
-  .controller('MainCtrl', function ($scope, Time, Manager, Player, $timeout, Onigiri, Log, Game) {
+  .controller('MainCtrl', function ($scope, Time, Manager, Player, $timeout, Onigiri, Log, Game, Achievements) {
 
-    $scope.version = 'v1.1.0 (2014.08.17)';
+    $scope.version = 'v1.1.1 (2014.08.17)';
 
     $scope.time = Time;
     $scope.jpDays = '日月火水木金土日'.split('');
@@ -25,11 +25,13 @@ angular.module('onigiriApp')
           Manager.nextYear();
           Player.nextYear();
 
-    Log.add(
-      '新年度',
-      '進級しました。メンバー構成を確認しましょう',
-      'panel-info'
-    );
+          Log.add(
+            '新年度',
+            '進級しました。メンバー構成を確認しましょう',
+            'panel-info'
+          );
+
+          Achievements.unlock('time1');
 //          toaster.pop('info', "新年度", "進級しました。メンバー構成を確認しましょう");
         }
 

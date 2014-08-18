@@ -13,6 +13,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/AngularJS-Toaster/toaster.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -70,12 +71,15 @@
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/showdown/compressed/showdown.js"></script>
       <script src="bower_components/angular-markdown-directive/markdown.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/AngularJS-Toaster/toaster.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
+          <script src="app/Achievements/Achievements.service.js"></script>
           <script src="app/Game/Game.service.js"></script>
           <script src="app/Log/Log.service.js"></script>
           <script src="app/Manager/Manager.service.js"></script>
