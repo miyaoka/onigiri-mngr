@@ -106,7 +106,7 @@ angular.module('onigiriApp')
         var result = (totals[1] > totals[0]) ? 0 : (totals[1] < totals[0]) ? 1 : 2;
         var money = (result == 0) ? (Math.pow(2,rank)) * 10000 : 0;
 
-        Money.value += money;
+        Money.count += money;
         Log.add(
           gameRanks[rank] + ' （' + resultStr[result] + '）',
           [

@@ -10,16 +10,17 @@ angular.module('onigiriApp')
     var buyMargin = 1.2;
     var sellMargin = .8;
 
+    //アイコン一つ当たりの米容量
+    var iconSmall = 60000;
+    var iconLarge = iconSmall * 50;
+
     var Rice = {
-      value : 0 * 1000,
-      get array(){
-        var ary = [];
-        //60kg単価
-        var len = Math.ceil(this.value/60000);
-        for(var i = 0; i < len; i++){
-          ary.push(i);
-        }
-        return ary;
+      count : 0 * 1000,
+      get largeCount(){
+        return Math.floor(this.count / iconLarge);
+      },
+      get smallCount(){
+        return Math.ceil((this.count % iconLarge) / iconSmall);
       },
       get supplyRate(){
         return supplySize / MaxSupplySize;
@@ -36,23 +37,23 @@ angular.module('onigiriApp')
         return this.marketPrice * sellMargin;
       },
       canBuy: function(num){
-        return (Money.value < (this.buyPrice * num)) ? false : true;
+        return (Money.count < (this.buyPrice * num)) ? false : true;
       },
       buy: function(num){
-        Money.value -= this.buyPrice * num;
+        Money.count -= this.buyPrice * num;
         supplySize -= num;
-        this.value += num;
+        this.count += num;
 
         Achievements.unlock('rice1');
-        if(this.value < 1000 * 1000){ return }
+        if(this.count < 1000 * 1000){ return }
           Achievements.unlock('rice2');
-        if(this.value < 2000 * 1000){ return }
+        if(this.count < 2000 * 1000){ return }
           Achievements.unlock('rice3');
-        if(this.value < 3000 * 1000){ return }
+        if(this.count < 3000 * 1000){ return }
           Achievements.unlock('rice4');
-        if(this.value < 4000 * 1000){ return }
+        if(this.count < 4000 * 1000){ return }
           Achievements.unlock('rice5');
-        if(this.value < 5000 * 1000){ return }
+        if(this.count < 5000 * 1000){ return }
           Achievements.unlock('rice6');
       }
     }

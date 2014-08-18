@@ -13,13 +13,6 @@ angular.module('onigiriApp')
 
     var Manager = {
       members : [0,0,0],
-      array: function(index){
-        var ary = [];
-        for(var i = 0; i < this.members[index]; i++){
-          ary.push(i);
-        }
-        return ary;
-      },
       get total(){
         return this.members[0] + this.members[1] + this.members[2];
       },
@@ -27,10 +20,10 @@ angular.module('onigiriApp')
         return Math.pow(basePrice, this.total) * constPrice;
       },
       get canBuy(){
-        return (Money.value < this.buyPrice) ? false : true;
+        return (Money.count < this.buyPrice) ? false : true;
       },
       buy: function(){
-        Money.value -= this.buyPrice;
+        Money.count -= this.buyPrice;
         this.members[0] += 1;
 
         Achievements.unlock('mgr1');
