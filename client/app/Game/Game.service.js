@@ -9,8 +9,9 @@ angular.module('onigiriApp')
     var teamCount = 4096;
     var minMember = 9;
     //部員数LNのパラメータ
-    var mu = 3.38;
-    var sigma = .48;
+    // 1/4096 = 8.0, 4095/4096 = 184.8
+    var mu = 3.65;
+    var sigma = .45;
 
     var teams = [];
     var gameRanks = [
@@ -88,8 +89,6 @@ angular.module('onigiriApp')
         var playerMembers = Player.total;
         var totalMembers = enemyMembers + playerMembers;
 
-        var erank = jStat.lognormal.cdf( enemyMembers, mu, sigma );
-        var frank = jStat.lognormal.cdf( playerMembers, mu, sigma );
 
         //メンバー数比率を0-1で正規化
         var memberRatios = [
