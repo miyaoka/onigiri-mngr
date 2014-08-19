@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('onigiriApp')
-  .factory('Manager', function (Money, Onigiri, Util, Achievements) {
+  .factory('Manager', function (Money, Onigiri, Util, Achievements, Time) {
     //base^n * const
     var constPrice = 10000;
     var basePrice = 1.5;
 
     //マネージャー一人当たりのおにぎり作成平均値
-    var OnigiriMu = 30;
+    var OnigiriMu = 50;
     //マネージャー一人当たりのおにぎり作成標準偏差
-    var OnigiriSigma = 5;
+    var OnigiriSigma = 15;
 
     var Manager = {
       members : [0,0,0],
@@ -44,6 +44,10 @@ angular.module('onigiriApp')
         var onigiris = 0;
         for(var i = 0; i < this.total; i++){
           onigiris += Math.floor(Util.nrMinMax(OnigiriMu, OnigiriSigma,0));
+        }
+        //土日は2倍
+        if(Time.date.getDay() == 0 || Time.date.getDay() == 6){
+          onigiris *= 2;
         }
         Onigiri.make(onigiris);
       }

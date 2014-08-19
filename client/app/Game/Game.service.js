@@ -31,6 +31,8 @@ angular.module('onigiriApp')
     var rank = 0;
     var enemyRank;
     var rankLocalFinal = 6;
+    var winMoneyBase = 20000;
+    var winMoneyPower = 2;
 
     function randDraw(list, max){
       if(!max){
@@ -72,6 +74,7 @@ angular.module('onigiriApp')
 
         //敵チームのランク取得（少ないほど弱い）
         if(enemyRank == null){
+          //練習試合なら下位10%とだけ当たる
           enemyRank = (rank == 0) ? randDraw(teams, .1) : randDraw(teams);
         }
         //ランク順からメンバー数を算出する
@@ -104,7 +107,7 @@ angular.module('onigiriApp')
 
         //0:win, 1:lose, 2:draw
         var result = (totals[1] > totals[0]) ? 0 : (totals[1] < totals[0]) ? 1 : 2;
-        var money = (result == 0) ? (Math.pow(2,rank)) * 10000 : 0;
+        var money = (result == 0) ? (Math.pow(winMoneyPower, rank)) * winMoneyBase : 0;
 
         Money.count += money;
         Log.add(

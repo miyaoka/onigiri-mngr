@@ -35,7 +35,7 @@ angular.module('onigiriApp')
       }
     }
     var Player = {
-      onigiriPerPlayer : 3,
+      onigiriPerPlayer : 5,
       members : [0,0,0],
 //        Math.floor(Math.random()*5)+3,
 //        Math.floor(Math.random()*5)+3,
@@ -80,7 +80,12 @@ angular.module('onigiriApp')
           }
           return;
         }
-        var supply = Onigiri.count / this.onigiriNeeds;
+        var needs = this.onigiriNeeds;
+        if(Time.date.getDay() == 0 || Time.date.getDay() == 6){
+          needs *= 2;
+        }
+
+        var supply = Onigiri.count / needs;
         this.supplyRate = supply;
         if(supply > 1){
           addNew();
