@@ -35,7 +35,8 @@ angular.module('onigiriApp')
           if(item.id != id){
             return false;
           }
-          Achievements.unlocked[id] = Time.date;
+          Achievements.unlocked[id] =
+          item.unlocked = Time.date;
           toaster.pop('success', '実績解除', item.title);
           return true;
         });

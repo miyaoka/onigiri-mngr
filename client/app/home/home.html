@@ -119,7 +119,7 @@
         <tr ng-repeat="a in achieve.list">
           <td>{{a.title}}</td>
           <td><div ng-hide="!achieve.unlocked[a.id]">{{a.desc}}</div></td>
-          <td>{{achieve.unlocked[a.id] ? (achieve.unlocked[a.id] | appdate) : ''}}</td>
+          <td>{{a.unlocked ? (a.unlocked | appdate) : ''}}</td>
         </tr>
       </table>
 
