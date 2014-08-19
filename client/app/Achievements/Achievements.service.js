@@ -20,6 +20,11 @@ angular.module('onigiriApp')
         { id: 'game4', title : 'ウソみたいだろ', desc : '地区大会決勝敗退' },
         { id: 'game5', title : '甲子園に行くんだな', desc : '甲子園出場' },
         { id: 'game6', title : 'その後、おかわりは', desc : '甲子園優勝' },
+        { id: 'onigiri1', title : 'さようなら、かにさん、ごちそうさま', desc : 'おにぎり累積10万個' },
+        { id: 'onigiri2', title : '早く芽を出せ、柿の種', desc : 'おにぎり累積50万個' },
+        { id: 'onigiri3', title : 'かにさん、かにさん、なぜ泣くの', desc : 'おにぎり累積100万個' },
+        { id: 'onigiri4', title : 'にくい猿だ', desc : 'おにぎり累積500万個' },
+        { id: 'onigiri5', title : '親のかたき、覚えたか', desc : 'おにぎり累積1000万個' },
         { id: 'money1', title: '与えられしもの', desc: '1000万円稼ぐ' },
         { id: 'money2', title: '沢山の思い出', desc: '1億円稼ぐ' },
         { id: 'money3', title: '翼を下さい', desc: '10億円稼ぐ' }
