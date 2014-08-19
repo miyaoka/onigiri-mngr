@@ -51,12 +51,18 @@ angular.module('onigiriApp')
     var Game = {
       winLocalCount : 0,
       winKoushienCount : 0,
+      lastLocalWin : 0,
+      lastKoushienWin : 0,
+      winLocalContinue : 1,
+      winKoushienContinue : 1,
       init : function(){
         //ランク付けされたチーム一覧を作成
         teams = [];
         for(var i = 0; i < teamCount; i++){
           teams.push(i);
         }
+        this.lastKoushienWin++;
+        this.lastLocalWin++;
       },
       gameOther: function(){
         var winners = [];
@@ -163,6 +169,33 @@ angular.module('onigiriApp')
           //地区大会決勝勝利
           if(rank == rankLocalFinal){
             this.winLocalCount++;
+
+            var str;
+            if(this.winLocalCount == 1){
+              str = '初の'
+            }
+            else {
+              if(this.lastLocalWin == 1){
+                str = ++this.winLocalContinue + 'シーズン連続、';
+              }
+              else {
+                str = this.lastLocalWin + 'シーズンぶり';
+                this.winLocalContinue = 1;
+              }
+              str += this.winLocalCount + '度目の';
+            }
+
+            Log.add(
+              '地区大会制覇！',
+              [
+                 str,
+                '＿人人人人人人人＿',
+                '＞　甲子園出場　＜',
+                '￣Y^Y^Y^Y^Y^Y￣'
+              ].join('<br>')
+            );
+
+            this.lastLocalWin = 0;
             Achievements.unlock('game5');
           }
 
@@ -177,6 +210,33 @@ angular.module('onigiriApp')
           //優勝したらリセット
           if(rank >= gameRanks.length){
             this.winKoushienCount++;
+
+            var str;
+            if(this.winKoushienCount == 1){
+              str = '初の'
+            }
+            else {
+              if(this.lastKoushienWin == 1){
+                str = ++this.winKoushienContinue + 'シーズン連続、';
+              }
+              else {
+                str = this.lastKoushienWin + 'シーズンぶり';
+                this.winKoushienContinue = 1;
+              }
+              str += this.winKoushienContinue + '度目の';
+            }
+
+            Log.add(
+              'おめでとう！',
+              [
+                str,
+                '＿人人人人人人人＿',
+                '＞　甲子園優勝　＜',
+                '￣Y^Y^Y^Y^Y^Y￣'
+              ].join('<br>')
+            );
+
+            this.lastKoushienWin = 0;
             Achievements.unlock('game6');
             rank = 0;
             this.init();
