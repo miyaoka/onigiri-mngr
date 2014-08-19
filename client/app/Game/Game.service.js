@@ -31,8 +31,11 @@ angular.module('onigiriApp')
     var rank = 0;
     var enemyRank;
     var rankLocalFinal = 6;
-    var winMoneyBase = 20000;
-    var winMoneyPower = 2;
+    var rankKoushien = 7;
+    var winMoneyBaseLocal = 20000;
+    var winMoneyPowerLocal = 2;
+    var winMoneyBaseKoushien = 250000;
+    var winMoneyPowerKoushien = 3;
 
     function randDraw(list, max){
       if(!max){
@@ -107,7 +110,15 @@ angular.module('onigiriApp')
 
         //0:win, 1:lose, 2:draw
         var result = (totals[1] > totals[0]) ? 0 : (totals[1] < totals[0]) ? 1 : 2;
-        var money = (result == 0) ? (Math.pow(winMoneyPower, rank)) * winMoneyBase : 0;
+        var money = 0;
+        if(result == 0){
+          if(rank < rankKoushien){
+            money = Math.pow(winMoneyPowerLocal, rank) * winMoneyBaseLocal;
+          }
+          else{
+            money = (Math.pow(winMoneyPowerKoushien, rank - rankKoushien) + 1) * winMoneyBaseKoushien;
+          }
+        }
 
         Money.count += money;
         Log.add(
