@@ -83,7 +83,8 @@ angular.module('onigiriApp')
           enemyRank = (rank == 0) ? randDraw(teams, .1) : randDraw(teams);
         }
         //ランク順からメンバー数を算出する
-        var enemyMembers = jStat.lognormal.inv(enemyRank / teamCount, mu, sigma) + minMember;
+        // （0 < p < 1 の範囲にする）
+        var enemyMembers = jStat.lognormal.inv((enemyRank + 1) / (teamCount + 1), mu, sigma);
         var playerMembers = Player.total;
         var totalMembers = enemyMembers + playerMembers;
 
