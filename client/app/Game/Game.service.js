@@ -33,7 +33,7 @@ angular.module('onigiriApp')
     var enemyRank;
     var rankLocalFinal = 6;
     var rankKoushien = 7;
-    var winMoneyBaseLocal = 20000;
+    var winMoneyBaseLocal = 25000;
     var winMoneyPowerLocal = 2;
     var winMoneyBaseKoushien = 250000;
     var winMoneyPowerKoushien = 3;
