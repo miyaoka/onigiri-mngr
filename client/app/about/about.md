@@ -119,3 +119,5 @@
 * ![米俵](assets/images/rice_bale.jpg) https://www.flickr.com/photos/nihonbunka/3430369539/
 * ![札束](assets/images/money.png) http://sozaidas.com/129illust01.html
 * ![おにぎり](assets/images/onigiri-2.png) http://www.sozaiyakoaki.com/spr/onigiri/
+* ![優勝旗](assets/images/t_trophy_a13.jpg) http://illpop.com/sport_a13.htm
+* ![優勝旗](assets/images/t_trophy_a14.jpg) http://illpop.com/sport_a13.htm
