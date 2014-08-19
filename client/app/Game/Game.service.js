@@ -48,6 +48,8 @@ angular.module('onigiriApp')
     }
 
     var Game = {
+      winLocalCount : 0,
+      winKoushienCount : 0,
       init : function(){
         //ランク付けされたチーム一覧を作成
         teams = [];
@@ -160,6 +162,7 @@ angular.module('onigiriApp')
           }
           //地区大会決勝勝利
           if(rank == rankLocalFinal){
+            this.winLocalCount++;
             Achievements.unlock('game5');
           }
 
@@ -173,6 +176,7 @@ angular.module('onigiriApp')
 
           //優勝したらリセット
           if(rank >= gameRanks.length){
+            this.winKoushienCount++;
             Achievements.unlock('game6');
             rank = 0;
             this.init();
