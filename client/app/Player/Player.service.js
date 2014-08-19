@@ -26,10 +26,15 @@ angular.module('onigiriApp')
         var m = Player.members[g];
         if(i < m){
           Player.members[g]--;
-          Log.add(
-            'おにぎり不足により',
-            '＿人人人人人人人＿<br>＞　突然の退部　＜<br>￣Y^Y^Y^Y^Y^Y￣' //<br>'+ '部員： ' + len +'人→' + (len-1) + '人'
-          )
+
+          //おにぎりが空のときの退部だけログに表示する
+          if(Onigiri.count == 0)
+          {
+            Log.add(
+              'おにぎり不足により',
+              '＿人人人人人人人＿<br>＞　突然の退部　＜<br>￣Y^Y^Y^Y^Y^Y￣' //<br>'+ '部員： ' + len +'人→' + (len-1) + '人'
+            )
+          }
           return;
         }
         i -= m;
