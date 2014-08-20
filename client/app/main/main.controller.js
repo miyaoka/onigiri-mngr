@@ -3,7 +3,7 @@
 angular.module('onigiriApp')
   .controller('MainCtrl', function ($scope, Time, Manager, Player, $timeout, Onigiri, Log, Game, Achievements) {
 
-    $scope.version = 'v1.1.8 (2014.08.20)';
+    $scope.version = 'v1.1.9 (2014.08.20)';
 
     $scope.time = Time;
 
