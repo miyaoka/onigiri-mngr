@@ -3,6 +3,7 @@
 angular.module('onigiriApp')
   .factory('Player', function (Money, Time, Onigiri, Log) {
     var basePrice = 100;
+    var onigiriPerPlayer = 5;
 
     function addNew(){
       var len = Player.total;
@@ -25,17 +26,21 @@ angular.module('onigiriApp')
         var m = Player.members[g];
         if(i < m){
           Player.members[g]--;
-          Log.add(
-            'おにぎり不足により',
-            '＿人人人人人人人＿<br>＞　突然の退部　＜<br>￣Y^Y^Y^Y^Y^Y￣' //<br>'+ '部員： ' + len +'人→' + (len-1) + '人'
-          )
+
+          //おにぎりが空のときの退部だけログに表示する
+          if(Onigiri.count == 0)
+          {
+            Log.add(
+              'おにぎり不足により',
+              '＿人人人人人人人＿<br>＞　突然の退部　＜<br>￣Y^Y^Y^Y^Y^Y￣' //<br>'+ '部員： ' + len +'人→' + (len-1) + '人'
+            )
+          }
           return;
         }
         i -= m;
       }
     }
     var Player = {
-      onigiriPerPlayer : 5,
       members : [0,0,0],
 //        Math.floor(Math.random()*5)+3,
 //        Math.floor(Math.random()*5)+3,
@@ -62,6 +67,12 @@ angular.module('onigiriApp')
       get onigiriNeeds(){
         return Math.ceil(this.total * this.onigiriPerPlayer);
       },
+      get onigiriPerPlayer(){
+        if(Time.date.getDay() == 0 || Time.date.getDay() == 6){
+          return onigiriPerPlayer * 2;
+        }
+        return onigiriPerPlayer;
+      },
       buy: function(){
         Money.count -= this.buyPrice;
         this.members[0] += 1;
@@ -72,17 +83,14 @@ angular.module('onigiriApp')
       },
       //毎ターンの処理
       run : function(){
+        var needs = this.onigiriNeeds;
         //部員ゼロの場合
-        if(this.onigiriNeeds == 0){
+        if(needs == 0){
           this.supplyRate = 0;
           if(0 < Onigiri.count){
             addNew();
           }
           return;
-        }
-        var needs = this.onigiriNeeds;
-        if(Time.date.getDay() == 0 || Time.date.getDay() == 6){
-          needs *= 2;
         }
 
         var supply = Onigiri.count / needs;

@@ -7,7 +7,7 @@ angular.module('onigiriApp')
     var dealSize = 100 * 1000;
     //g当たりの価格
     var dealPrice = .2;
-    var buyMargin = 1.2;
+    var buyMargin = 1.0;
     var sellMargin = .8;
 
     //アイコン一つ当たりの米容量

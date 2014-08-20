@@ -9,8 +9,9 @@ angular.module('onigiriApp')
     var teamCount = 4096;
     var minMember = 9;
     //部員数LNのパラメータ
-    var mu = 3.38;
-    var sigma = .48;
+    // 1/4096 = 8.0, 4095/4096 = 184.8
+    var mu = 3.65;
+    var sigma = .45;
 
     var teams = [];
     var gameRanks = [
@@ -32,7 +33,7 @@ angular.module('onigiriApp')
     var enemyRank;
     var rankLocalFinal = 6;
     var rankKoushien = 7;
-    var winMoneyBaseLocal = 20000;
+    var winMoneyBaseLocal = 25000;
     var winMoneyPowerLocal = 2;
     var winMoneyBaseKoushien = 250000;
     var winMoneyPowerKoushien = 3;
@@ -50,12 +51,18 @@ angular.module('onigiriApp')
     var Game = {
       winLocalCount : 0,
       winKoushienCount : 0,
+      lastLocalWin : 0,
+      lastKoushienWin : 0,
+      winLocalContinue : 1,
+      winKoushienContinue : 1,
       init : function(){
         //ランク付けされたチーム一覧を作成
         teams = [];
         for(var i = 0; i < teamCount; i++){
           teams.push(i);
         }
+        this.lastKoushienWin++;
+        this.lastLocalWin++;
       },
       gameOther: function(){
         var winners = [];
@@ -83,12 +90,11 @@ angular.module('onigiriApp')
           enemyRank = (rank == 0) ? randDraw(teams, .1) : randDraw(teams);
         }
         //ランク順からメンバー数を算出する
-        var enemyMembers = jStat.lognormal.inv(enemyRank / teamCount, mu, sigma) + minMember;
+        // （0 < p < 1 の範囲にする）
+        var enemyMembers = jStat.lognormal.inv((enemyRank + 1) / (teamCount + 1), mu, sigma);
         var playerMembers = Player.total;
         var totalMembers = enemyMembers + playerMembers;
 
-        var erank = jStat.lognormal.cdf( enemyMembers, mu, sigma );
-        var frank = jStat.lognormal.cdf( playerMembers, mu, sigma );
 
         //メンバー数比率を0-1で正規化
         var memberRatios = [
@@ -163,6 +169,33 @@ angular.module('onigiriApp')
           //地区大会決勝勝利
           if(rank == rankLocalFinal){
             this.winLocalCount++;
+
+            var str;
+            if(this.winLocalCount == 1){
+              str = '初の'
+            }
+            else {
+              if(this.lastLocalWin == 1){
+                str = ++this.winLocalContinue + 'シーズン連続、';
+              }
+              else {
+                str = this.lastLocalWin + 'シーズンぶり';
+                this.winLocalContinue = 1;
+              }
+              str += this.winLocalCount + '度目の';
+            }
+
+            Log.add(
+              '地区大会制覇！',
+              [
+                 str,
+                '＿人人人人人人人＿',
+                '＞　甲子園出場　＜',
+                '￣Y^Y^Y^Y^Y^Y￣'
+              ].join('<br>')
+            );
+
+            this.lastLocalWin = 0;
             Achievements.unlock('game5');
           }
 
@@ -177,6 +210,33 @@ angular.module('onigiriApp')
           //優勝したらリセット
           if(rank >= gameRanks.length){
             this.winKoushienCount++;
+
+            var str;
+            if(this.winKoushienCount == 1){
+              str = '初の'
+            }
+            else {
+              if(this.lastKoushienWin == 1){
+                str = ++this.winKoushienContinue + 'シーズン連続、';
+              }
+              else {
+                str = this.lastKoushienWin + 'シーズンぶり';
+                this.winKoushienContinue = 1;
+              }
+              str += this.winKoushienContinue + '度目の';
+            }
+
+            Log.add(
+              'おめでとう！',
+              [
+                str,
+                '＿人人人人人人人＿',
+                '＞　甲子園優勝　＜',
+                '￣Y^Y^Y^Y^Y^Y￣'
+              ].join('<br>')
+            );
+
+            this.lastKoushienWin = 0;
             Achievements.unlock('game6');
             rank = 0;
             this.init();
