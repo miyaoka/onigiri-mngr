@@ -49,8 +49,9 @@ angular.module('onigiriApp')
     }
 
     var Game = {
-      winLocalCount : 0,
-      winKoushienCount : 0,
+      local1stCount : 0,
+      koushien1stCount : 0,
+      koushien2ndCount : 0,
       lastLocalWin : 0,
       lastKoushienWin : 0,
       winLocalContinue : 1,
@@ -172,10 +173,10 @@ angular.module('onigiriApp')
           }
           //地区大会決勝勝利
           if(rank == rankLocalFinal){
-            this.winLocalCount++;
+            this.local1stCount++;
 
             var str;
-            if(this.winLocalCount == 1){
+            if(this.local1stCount == 1){
               str = '初の'
             }
             else {
@@ -186,7 +187,7 @@ angular.module('onigiriApp')
                 str = this.lastLocalWin + 'シーズンぶり';
                 this.winLocalContinue = 1;
               }
-              str += this.winLocalCount + '度目の';
+              str += this.local1stCount + '度目の';
             }
 
             Log.add(
@@ -213,10 +214,10 @@ angular.module('onigiriApp')
 
           //優勝したらリセット
           if(rank >= gameRanks.length){
-            this.winKoushienCount++;
+            this.koushien1stCount++;
 
             var str;
-            if(this.winKoushienCount == 1){
+            if(this.koushien1stCount == 1){
               str = '初の'
             }
             else {
@@ -227,7 +228,7 @@ angular.module('onigiriApp')
                 str = this.lastKoushienWin + 'シーズンぶり';
                 this.winKoushienContinue = 1;
               }
-              str += this.winKoushienCount + '度目の';
+              str += this.koushien1stCount + '度目の';
             }
 
             Log.add(
@@ -252,7 +253,10 @@ angular.module('onigiriApp')
           if(rank == rankLocalFinal){
             Achievements.unlock('game4');
           }
-
+          //甲子園決勝敗退
+          if(rank == gameRanks.length - 1){
+            this.koushien2ndCount++;
+          }
           rank = 0;
           this.init();
         }
