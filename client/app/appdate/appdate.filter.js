@@ -3,13 +3,12 @@
 angular.module('onigiriApp')
   .filter('appdate', function ($filter) {
     var jpDays = '日月火水木金土日'.split('');
-
     return function (date) {
-//      {{time.date | date: 'yyyy年MM月dd日'}}({{jpDays[time.date.getDay()]}})
+      var day = date.getDay();
       return [
-        (date.getFullYear() - 2000),
-        $filter('date')(date, '年目MM月dd日'),
-        '(', jpDays[date.getDay()], ')'
+        date.getFullYear() - 2000,
+        $filter('date')(date, '年目 M月d日'),
+        '(<span class="day-', day, '">', jpDays[day], '</span>)'
       ].join('');
     };
   });
