@@ -35,8 +35,8 @@ angular.module('onigiriApp')
     var rankKoushien = 7;
     var winMoneyBaseLocal = 25000;
     var winMoneyPowerLocal = 2;
-    var winMoneyBaseKoushien = 250000;
-    var winMoneyPowerKoushien = 3;
+    var winMoneyBaseKoushien = 2000000;
+    var winMoneyPowerKoushien = 2;
 
     function randDraw(list, max){
       if(!max){
@@ -122,9 +122,13 @@ angular.module('onigiriApp')
         if(result == 0){
           if(rank < rankKoushien){
             money = Math.pow(winMoneyPowerLocal, rank) * winMoneyBaseLocal;
+            //地区大会優勝ボーナス
+            if(rank==rankLocalFinal){
+              money *= 1.5;
+            }
           }
           else{
-            money = (Math.pow(winMoneyPowerKoushien, rank - rankKoushien) + 1) * winMoneyBaseKoushien;
+            money = Math.pow(winMoneyPowerKoushien, rank - rankKoushien) * winMoneyBaseKoushien;
           }
         }
 
