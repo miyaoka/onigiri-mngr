@@ -227,7 +227,7 @@ angular.module('onigiriApp')
                 str = this.lastKoushienWin + 'シーズンぶり';
                 this.winKoushienContinue = 1;
               }
-              str += this.winKoushienContinue + '度目の';
+              str += this.winKoushienCount + '度目の';
             }
 
             Log.add(
