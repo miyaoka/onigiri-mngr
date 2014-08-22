@@ -31,9 +31,9 @@
 
     <table class="table">
 
-    <tr ng-show="game.winLocalCount > 0">
-      <td>大会優勝</td>
-      <td><img src="assets/images/t_trophy_a14.jpg" class="flag" ng-repeat="n in [game.winLocalCount] | range"><img src="assets/images/t_trophy_a13.jpg" class="flag" ng-repeat="n in [game.winKoushienCount] | range"></td>
+    <tr ng-show="game.local1stCount > 0">
+      <td>大会トロフィー</td>
+      <td><img src="assets/images/t_trophy_a14.jpg" class="trophy" ng-repeat="n in [game.local1stCount] | range"><img src="assets/images/t_trophy_a11.jpg" class="trophy" ng-repeat="n in [game.koushien2ndCount] | range"><img src="assets/images/t_trophy_a13.jpg" class="trophy" ng-repeat="n in [game.koushien1stCount] | range"></td>
     </tr>
 
 

@@ -121,3 +121,4 @@
 * ![おにぎり](assets/images/onigiri-2.png) http://www.sozaiyakoaki.com/spr/onigiri/
 * ![優勝旗](assets/images/t_trophy_a13.jpg) http://illpop.com/sport_a13.htm
 * ![優勝旗](assets/images/t_trophy_a14.jpg) http://illpop.com/sport_a13.htm
+* ![メダル](assets/images/t_trophy_a11.jpg) http://illpop.com/sport_a13.htm
